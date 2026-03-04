@@ -2,40 +2,70 @@ package main
 
 import (
 	"fmt"
-	"pertama/calculation"
-	"pertama/calculation_two"
 )
 
+type Student struct {
+	ID        int
+	FirstName string
+	LastName  string
+}
+
 func main() {
-	fmt.Println("Hello, World!")
+	// fmt.Println("Hello, World!")
 
-	result := calculation.Add(10, 20)
-	fmt.Println(result)
+	// result := calculation.Add(10, 20)
+	// fmt.Println(result)
 
-	result_two := calculation_two.Multiply(10, 20)
-	fmt.Println(result_two)
+	// result_two := calculation_two.Multiply(10, 20)
+	// fmt.Println(result_two)
 
-	age := 20
-	fmt.Printf("Umur saya adalah %d tahun\n", age)
+	// age := 20
+	// fmt.Printf("Umur saya adalah %d tahun\n", age)
 
-	if age >= 18 {
-		fmt.Println("Anda sudah dewasa")
-	} else {
-		fmt.Println("Anda masih anak-anak")
-	}
+	// if age >= 18 {
+	// 	fmt.Println("Anda sudah dewasa")
+	// } else {
+	// 	fmt.Println("Anda masih anak-anak")
+	// }
 
-	// switch
-	number := 2
-	switch number {
-	case 1:
-		fmt.Println("Satu")
-	case 2:
-		fmt.Println("Dua")
-	case 3:
-		fmt.Println("Tiga")
-	default:
-		fmt.Println("Angka tidak dikenal")
-	}
+	// // switch
+	// number := 2
+	// switch number {
+	// case 1:
+	// 	fmt.Println("Satu")
+	// case 2:
+	// 	fmt.Println("Dua")
+	// case 3:
+	// 	fmt.Println("Tiga")
+	// default:
+	// 	fmt.Println("Angka tidak dikenal")
+	// }
+
+	// printMyResult("yauuuu")
+	// fmt.Println(add(100, 700))
+	// sum, product := calculate(10, 20)
+	// fmt.Printf("Hasil penjumlahan: %d, Hasil perkalian: %d\n", sum, product)
+
+	// fmt.Println(calculateWithPredefinedReturn(10, 20))
+
+	// scores := []int{5, 15, 25}
+	// total := sum2(scores)
+
+	// fmt.Printf("Total skor: %d\n", total)
+
+	// result, err := calculate3(10, 2, "+")
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// } else {
+	// 	fmt.Printf("Hasil: %d\n", result)
+	// }
+
+	// struct
+	user := Student{}
+	user.ID = 1
+	user.FirstName = "John"
+	user.LastName = "Doe"
+	fmt.Println(user.FirstName)
 
 	// for loop
 	// for i := 0; i < 5; i++ {
@@ -149,14 +179,65 @@ func main() {
 	// average := float64(total) / float64(len(scores))
 	// fmt.Printf("Rata-rata nilai: %.2f\n", average)
 
-	scores := [8]int{90, 85, 78, 92, 88, 95, 80, 91}
-	var goodScores []int
-	for index, score := range scores {
-		if score >= 90 {
-			goodScores = append(goodScores, score)
-			fmt.Printf("Nilai ke-%d: %d adalah nilai yang baik\n", index, score)
-		}
-	}
-	fmt.Printf("Nilai yang baik: %v\n", goodScores)
+	// scores := [8]int{90, 85, 78, 92, 88, 95, 80, 91}
+	// var goodScores []int
+	// for index, score := range scores {
+	// 	if score >= 90 {
+	// 		goodScores = append(goodScores, score)
+	// 		fmt.Printf("Nilai ke-%d: %d adalah nilai yang baik\n", index, score)
+	// 	}
+	// }
+	// fmt.Printf("Nilai yang baik: %v\n", goodScores)
 
+}
+
+// function
+
+func printMyResult(sentence string) {
+	fmt.Println(sentence)
+}
+
+func add(a int, b int) int {
+	return a + b
+}
+
+// return multiple value
+func calculate(a int, b int) (int, int) {
+	sum := a + b
+	product := a * b
+	return sum, product
+}
+
+// function dengan predefined return value
+func calculateWithPredefinedReturn(a int, b int) (sum int, product int) {
+	sum = a + b
+	product = a * b
+	return
+}
+
+func sum2(numbers []int) int {
+	total := 0
+	for _, number := range numbers {
+		total += number
+	}
+	return total
+}
+
+func calculate3(a int, b int, operator string) (int, error) {
+	switch operator {
+	case "+":
+		return a + b, nil
+	case "-":
+		return a - b, nil
+	case "*":
+		return a * b, nil
+	case "/":
+		if b != 0 {
+			return a / b, nil
+		} else {
+			return 0, fmt.Errorf("Pembagian dengan nol tidak diperbolehkan")
+		}
+	default:
+		return 0, fmt.Errorf("Operator tidak dikenal")
+	}
 }
