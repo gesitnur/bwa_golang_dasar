@@ -10,6 +10,18 @@ type Student struct {
 	LastName  string
 }
 
+type Group struct {
+	Name        string
+	Admin       Student
+	Users       []Student
+	IsAvaliable bool
+}
+
+// method untuk struct
+func (user Student) display() string {
+	return fmt.Sprintf("ID: %d, Name display: %s", user.ID, user.FirstName)
+}
+
 func main() {
 	// fmt.Println("Hello, World!")
 
@@ -65,7 +77,29 @@ func main() {
 	user.ID = 1
 	user.FirstName = "John"
 	user.LastName = "Doe"
+	fmt.Println(user.display())
+
+	user2 := Student{
+		ID:        2,
+		FirstName: "Jane",
+		LastName:  "Smith",
+	}
+
+	users := []Student{user, user2}
+
+	group := Group{"Agam", user, users, true}
+
+	displayGroup(group)
+
+	fmt.Println(group)
+
 	fmt.Println(user.FirstName)
+
+	fmt.Println(displayUser(user))
+
+	// struct untuk atribut atau field dari struct lainnya
+
+	// struct sebagai parameter
 
 	// for loop
 	// for i := 0; i < 5; i++ {
@@ -189,6 +223,22 @@ func main() {
 	// }
 	// fmt.Printf("Nilai yang baik: %v\n", goodScores)
 
+}
+
+// embedded struct
+func displayGroup(group Group) {
+	fmt.Printf("Group Name: %s\n", group.Name)
+	fmt.Printf("Admin Name: %s\n", group.Admin.FirstName)
+	fmt.Printf("Is Available: %t\n", group.IsAvaliable)
+	fmt.Println("Users:")
+	for _, user := range group.Users {
+		fmt.Printf("- %s %s\n", user.FirstName, user.LastName)
+	}
+}
+
+func displayUser(user Student) string {
+	result := fmt.Sprintf("ID: %d, Name: %s", user.ID, user.FirstName)
+	return result
 }
 
 // function
