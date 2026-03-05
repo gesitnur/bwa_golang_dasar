@@ -8,6 +8,7 @@ type Student struct {
 	ID        int
 	FirstName string
 	LastName  string
+	GPA       float32
 }
 
 type Group struct {
@@ -130,8 +131,6 @@ func main() {
 
 	// struct untuk atribut atau field dari struct lainnya
 
-	// struct sebagai parameter
-
 	// for loop
 	// for i := 0; i < 5; i++ {
 	// 	fmt.Printf("Perulangan ke-%d\n", i)
@@ -253,6 +252,26 @@ func main() {
 	// 	}
 	// }
 	// fmt.Printf("Nilai yang baik: %v\n", goodScores)
+
+	// pointer struct sebagai parameter
+	student := Student{
+		ID:        1,
+		FirstName: "John",
+		LastName:  "Doe",
+		GPA:       3.5,
+	}
+
+	fmt.Println("Sebelum graduate:", student.FirstName)
+	graduate(&student)
+	// yang dikirim adalah memori dari struct student, atau referensing ke struct student, sehingga perubahan yang dilakukan di dalam fungsi graduate akan mempengaruhi nilai dari struct student di luar fungsi tersebut. Jika kita tidak menggunakan pointer, maka perubahan yang dilakukan di dalam fungsi graduate tidak akan mempengaruhi nilai dari struct student di luar fungsi tersebut karena yang dikirim ke fungsi graduate adalah salinan dari struct student, bukan referensi ke struct student yang asli.
+	fmt.Println("Setelah graduate:", student.FirstName)
+
+}
+
+// pointer struct sebagai parameter
+func graduate(student *Student) {
+	// harus menerima parameter pointer tanda bintang
+	student.FirstName = "Sabar"
 
 }
 
