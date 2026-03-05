@@ -18,6 +18,11 @@ type Group struct {
 	IsAvaliable bool
 }
 
+type Gamer struct {
+	Name  string
+	Games []string
+}
+
 // method untuk struct
 func (user Student) display() string {
 	return fmt.Sprintf("ID: %d, Name display: %s", user.ID, user.FirstName)
@@ -33,7 +38,37 @@ func (group Group) display2() {
 	}
 }
 
+// Method dengan pointer receiver
+func (student *Student) graduate() {
+	student.FirstName = "Sabar"
+}
+
+// quiz method dengan pointer receiver
+func (gamer *Gamer) AddGame(newGame string) {
+	gamer.Games = append(gamer.Games, newGame)
+}
+
 func main() {
+	student := Student{
+		ID:        1,
+		FirstName: "John",
+		LastName:  "Doe",
+		GPA:       3.5,
+	}
+
+	gamer := Gamer{
+		Name: "Alice",
+	}
+
+	fmt.Println("Sebelum menambahkan game:", gamer.Games)
+	gamer.AddGame("The Legend of Zelda")
+	gamer.AddGame("Super Mario Odyssey")
+	fmt.Println("Setelah menambahkan game:", gamer.Games)
+
+	// Method dengan pointer receiver
+	fmt.Println("Sebelum graduate:", student.FirstName)
+	student.graduate()
+	fmt.Println("Setelah graduate:", student.FirstName)
 	// fmt.Println("Hello, World!")
 
 	// result := calculation.Add(10, 20)
@@ -254,26 +289,26 @@ func main() {
 	// fmt.Printf("Nilai yang baik: %v\n", goodScores)
 
 	// pointer struct sebagai parameter
-	student := Student{
-		ID:        1,
-		FirstName: "John",
-		LastName:  "Doe",
-		GPA:       3.5,
-	}
+	// student := Student{
+	// 	ID:        1,
+	// 	FirstName: "John",
+	// 	LastName:  "Doe",
+	// 	GPA:       3.5,
+	// }
 
-	fmt.Println("Sebelum graduate:", student.FirstName)
-	graduate(&student)
-	// yang dikirim adalah memori dari struct student, atau referensing ke struct student, sehingga perubahan yang dilakukan di dalam fungsi graduate akan mempengaruhi nilai dari struct student di luar fungsi tersebut. Jika kita tidak menggunakan pointer, maka perubahan yang dilakukan di dalam fungsi graduate tidak akan mempengaruhi nilai dari struct student di luar fungsi tersebut karena yang dikirim ke fungsi graduate adalah salinan dari struct student, bukan referensi ke struct student yang asli.
-	fmt.Println("Setelah graduate:", student.FirstName)
+	// fmt.Println("Sebelum graduate:", student.FirstName)
+	// graduate(&student)
+	// // yang dikirim adalah memori dari struct student, atau referensing ke struct student, sehingga perubahan yang dilakukan di dalam fungsi graduate akan mempengaruhi nilai dari struct student di luar fungsi tersebut. Jika kita tidak menggunakan pointer, maka perubahan yang dilakukan di dalam fungsi graduate tidak akan mempengaruhi nilai dari struct student di luar fungsi tersebut karena yang dikirim ke fungsi graduate adalah salinan dari struct student, bukan referensi ke struct student yang asli.
+	// fmt.Println("Setelah graduate:", student.FirstName)
 
 }
 
 // pointer struct sebagai parameter
-func graduate(student *Student) {
-	// harus menerima parameter pointer tanda bintang
-	student.FirstName = "Sabar"
+// func graduate(student *Student) {
+// 	// harus menerima parameter pointer tanda bintang
+// 	student.FirstName = "Sabar"
 
-}
+// }
 
 func change(number *int, newValue int) {
 	*number = newValue
