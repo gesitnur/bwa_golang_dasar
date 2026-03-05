@@ -22,6 +22,16 @@ func (user Student) display() string {
 	return fmt.Sprintf("ID: %d, Name display: %s", user.ID, user.FirstName)
 }
 
+func (group Group) display2() {
+	fmt.Printf("Group Name: %s\n", group.Name)
+	fmt.Printf("Admin Name: %s\n", group.Admin.FirstName)
+	fmt.Printf("Is Available: %t\n", group.IsAvaliable)
+	fmt.Println("Users:")
+	for _, user := range group.Users {
+		fmt.Printf("- %s %s\n", user.FirstName, user.LastName)
+	}
+}
+
 func main() {
 	// fmt.Println("Hello, World!")
 
@@ -90,12 +100,21 @@ func main() {
 	group := Group{"Agam", user, users, true}
 
 	displayGroup(group)
+	group.display2()
 
 	fmt.Println(group)
 
 	fmt.Println(user.FirstName)
 
 	fmt.Println(displayUser(user))
+
+	// simple pointer
+	numberA := 5
+	numberB := &numberA
+
+	*numberB = 10
+
+	fmt.Println("Nilai numberA:", numberA)
 
 	// struct untuk atribut atau field dari struct lainnya
 
