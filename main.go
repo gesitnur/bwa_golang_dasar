@@ -116,6 +116,18 @@ func main() {
 
 	fmt.Println("Nilai numberA:", numberA)
 
+	// var numberC int = 15
+	// var numberD int = &numberC -> ini error
+	// var numberD *int = &numberC
+
+	// Contoh kasus penggunaan pointer
+	number := 5
+
+	change(&number, 100)
+	// tanpa pointer, nilai number tidak akan berubah karena yang dikirim ke fungsi change adalah salinan dari nilai number, bukan referensi ke nilai aslinya. Dengan menggunakan pointer, kita dapat mengubah nilai number di dalam fungsi change, dan perubahan tersebut akan terlihat di luar fungsi.
+
+	fmt.Println("Nilai number setelah fungsi change dipanggil:", number)
+
 	// struct untuk atribut atau field dari struct lainnya
 
 	// struct sebagai parameter
@@ -242,6 +254,10 @@ func main() {
 	// }
 	// fmt.Printf("Nilai yang baik: %v\n", goodScores)
 
+}
+
+func change(number *int, newValue int) {
+	*number = newValue
 }
 
 // embedded struct
