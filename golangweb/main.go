@@ -7,11 +7,16 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
-	mux.Handle("/hello", http.HandlerFunc(helloHandlet))
+	mux.Handle("/hello", http.HandlerFunc(helloHandler))
+	mux.Handle("/mario", http.HandlerFunc(helloMarioHandler))
 
 	http.ListenAndServe(":8080", mux)
 }
 
-func helloHandlet(w http.ResponseWriter, r *http.Request) {
+func helloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello, World!"))
+}
+
+func helloMarioHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello, Mario!"))
 }
