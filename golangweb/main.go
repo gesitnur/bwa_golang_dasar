@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 )
 
 func main() {
@@ -18,5 +19,18 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func helloMarioHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Query().Get("id")
+	idNumb, err := strconv.Atoi(id)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Invalid ID"))
+		return
+	}
+
+	if idNumb != 1 {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("Mario not found"))
+		return
+	}
 	w.Write([]byte("Hello, Mario!"))
 }
